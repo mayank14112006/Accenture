@@ -1,0 +1,7 @@
+# India overlay — DPDP Act posture (defaults; matches the base packs).
+thresholds:
+  privacy:   { flag: 0.30, block: 0.60 }
+severities_inr:
+  privacy: 250000
+redact_pii: true
+low_trust_taints: true

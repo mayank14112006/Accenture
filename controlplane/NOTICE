@@ -1,0 +1,24 @@
+ControlPlane prototype
+Copyright 2026 Team Pluoton — Accenture Innovation Challenge 2026, Track 1
+
+This product includes software developed with the following open-source
+components (core profile):
+- FastAPI (MIT), Starlette (BSD-3), Uvicorn (BSD-3)
+- Pydantic (MIT), PyYAML (MIT), httpx (BSD-3)
+- React (MIT), Vite (MIT), Recharts (MIT)
+
+Optional full-profile detector adapters reference the following models and
+libraries, downloaded separately by the user at their own election:
+- cross-encoder/nli-MiniLM2-L6-H768 (Apache-2.0, sentence-transformers/UKPLab)
+- unitary/toxic-bert (Apache-2.0, Unitary)
+- Hugging Face transformers / optimum / onnxruntime (Apache-2.0 / MIT)
+
+Evaluation design acknowledgements: injected-failure archetypes follow the
+published methodology of public benchmarks — HaluEval and RAGTruth
+(hallucination / unsupported assertion), JailbreakBench and garak (prompt
+injection), Microsoft Presidio's recognizer taxonomy (PII formats). No
+benchmark data is redistributed in this repository; all evaluation records
+are synthetically generated (evals/generate.py, fixed seed).
+
+The Verhoeff checksum implementation for Aadhaar-format validation follows the
+public-domain algorithm description.

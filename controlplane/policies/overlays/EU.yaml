@@ -1,0 +1,10 @@
+# EU overlay — GDPR + EU AI Act posture: stricter privacy thresholds,
+# higher privacy severity, tighter episode budget, always redact.
+thresholds:
+  privacy:   { flag: 0.20, block: 0.45 }
+  grounding: { flag: 0.40, block: 0.75 }
+severities_inr:
+  privacy: 400000
+redact_pii: true
+low_trust_taints: true
+budget_percentile: 90

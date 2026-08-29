@@ -1,0 +1,20 @@
+{
+ "grounding_lexical": {
+  "grounding": 0.964
+ },
+ "injection_sig": {
+  "injection": 1.0
+ },
+ "pii_regex": {
+  "privacy": 1.0
+ },
+ "cost_meter": {
+  "cost": 1.0
+ },
+ "toxicity_lexicon": {
+  "toxicity": 1.0
+ },
+ "pii_name_ctx": {
+  "privacy": 0.5152
+ }
+}

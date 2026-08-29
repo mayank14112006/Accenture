@@ -1,0 +1,53 @@
+{
+ "latency_probe": {
+  "requests": 300,
+  "concurrency": 2,
+  "errors": 0,
+  "wall_seconds": 3.56,
+  "throughput_rps": 84.2,
+  "end_to_end_ms": {
+   "p50": 21.05,
+   "p95": 31.17,
+   "p99": 52.4,
+   "mean": 22.36
+  },
+  "assurance_added_ms": {
+   "added_p50": 12.62,
+   "added_p95": 20.27,
+   "added_p99": 25.0,
+   "ttft_p50": 0.0,
+   "ttft_p95": 0.0,
+   "inter_sentence_gap_p95": 0.0
+  }
+ },
+ "throughput_saturation": {
+  "requests": 2000,
+  "concurrency": 32,
+  "errors": 0,
+  "wall_seconds": 18.51,
+  "throughput_rps": 108.1,
+  "end_to_end_ms": {
+   "p50": 261.49,
+   "p95": 371.79,
+   "p99": 493.06,
+   "mean": 276.54
+  },
+  "note": "p95 at saturation measures queueing on one CPU-bound instance; scale-out is horizontal (stateless gateway, episode store shardable by episode_id)"
+ },
+ "coverage_p50": 0.9,
+ "decisions_at_saturation": {
+  "PASS": 1433,
+  "REPAIR": 360,
+  "BLOCK": 196,
+  "ANNOTATE": 11
+ },
+ "cost_inr": {
+  "model_spend": 13.2592,
+  "assurance_spend": 0.0054,
+  "assurance_pct_of_model_spend": 0.04,
+  "avoided_loss_illustrative": 7780000.0,
+  "note": "cost rates and severities are stated assumptions; see policy packs and config.py"
+ },
+ "traffic": "mixed (~70% benign / 10% PII / 10% hallucination / 10% toxicity), ~250-token responses, lite profile, in-process ASGI",
+ "machine": "LAPTOP-4P6OEE6E"
+}

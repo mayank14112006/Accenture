@@ -1,0 +1,13 @@
+.git
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+node_modules/
+dashboard/dist/
+data/
+evals/out/data/
+evals/out/data-load/
+.env
+qa/

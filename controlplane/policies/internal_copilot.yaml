@@ -1,0 +1,36 @@
+# Internal knowledge copilot — employee-facing, medium risk tolerance,
+# relaxed latency. Full Tier-1 runs BEFORE release (fits in 1.5 s).
+# Grounding is checked against registered internal sources with trust tiers.
+name: internal_copilot
+version: 3
+jurisdiction: IN
+description: >
+  Internal knowledge assistant over a mix of well-governed and loosely
+  governed sources. Claims supported only by low-trust sources (shared
+  drives, email, agent memory) are annotated with provenance and taint
+  the episode. Abstains (INSUFFICIENT_EVIDENCE) when no sources exist.
+mode: inline
+latency_budget_ms: 1500
+failure_mode: fail_open
+data_sensitivity: internal
+stream_release: sentence
+assumed_base_rate: 0.04
+thresholds:
+  privacy:   { flag: 0.35, block: 0.70 }
+  grounding: { flag: 0.45, block: 0.85 }
+  toxicity:  { flag: 0.45, block: 0.80 }
+  injection: { flag: 0.35, block: 0.65 }
+  cost:      { flag: 0.60, block: 0.90 }
+severities_inr:            # ILLUSTRATIVE — agreed with client risk office in deployment
+  privacy: 90000
+  grounding: 15000         # bad internal decision input
+  toxicity: 30000          # HR exposure
+  injection: 60000         # indirect injection via poisoned documents
+  cost: 3000
+episode_budget_inr: 30000
+budget_percentile: 95
+identity_window: { limit_inr: 150000, window_hours: 24 }
+correlated_clusters: [["grounding", "privacy"]]
+tools: {}
+low_trust_taints: true
+redact_pii: true

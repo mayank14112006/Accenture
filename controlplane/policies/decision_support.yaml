@@ -1,0 +1,49 @@
+# Regulated decision-support agent — takes actions. Lowest risk tolerance,
+# generous latency. GATE mode: the proxy withholds tool calls until cleared.
+# Fails CLOSED: if the checker itself faults, nothing irreversible executes.
+# This is where the episode budget, claim taint and action gate live.
+name: decision_support
+version: 4
+jurisdiction: IN
+description: >
+  Agentic decision-support in a regulated workflow (payments/records).
+  Irreversible tool calls require a taint-clear episode: no unresolved
+  TAINTED or LOW_TRUST claim anywhere in the episode window — clean
+  arguments alone are not sufficient (clean-args/tainted-premise case).
+mode: gate
+latency_budget_ms: 10000
+failure_mode: fail_closed
+data_sensitivity: regulated
+stream_release: sentence
+assumed_base_rate: 0.05
+thresholds:
+  privacy:   { flag: 0.25, block: 0.55 }
+  grounding: { flag: 0.35, block: 0.75 }
+  toxicity:  { flag: 0.40, block: 0.75 }
+  injection: { flag: 0.25, block: 0.50 }
+  cost:      { flag: 0.50, block: 0.85 }
+severities_inr:            # ILLUSTRATIVE — agreed with client risk office in deployment
+  privacy: 250000          # regulated-data exposure incident (remediation floor, not statutory ceiling)
+  grounding: 120000        # wrongful irreversible action on a fabricated premise
+  toxicity: 40000
+  injection: 200000
+  cost: 5000
+# Budget must sit BELOW the worst-case loss of any single category it is meant
+# to catch (grounding severity is ₹120k) — otherwise single-category compounding
+# could never trigger episode escalation, since expected loss is bounded.
+episode_budget_inr: 100000
+budget_percentile: 90      # regulated: escalate earlier (top 10%)
+identity_window: { limit_inr: 400000, window_hours: 24 }
+correlated_clusters: [["grounding", "privacy"]]
+tools:
+  lookup_account: reversible
+  draft_note: reversible
+  search_records: reversible
+  issue_refund: irreversible
+  transfer_funds: irreversible
+  send_email: irreversible
+  delete_record: irreversible
+  submit_claim: irreversible
+irreversible_requires: grounded
+low_trust_taints: true
+redact_pii: true

@@ -1,0 +1,35 @@
+# Customer support assistant — customer-facing, real-time, low tolerance on
+# privacy and brand, tightest latency budget. Fails OPEN (annotated) so a
+# checker fault never takes the storefront down.
+name: customer_support
+version: 3
+jurisdiction: IN
+description: >
+  Customer-facing support chat. Streaming with sentence-buffered release.
+  Tier-0 gates every sentence inline; Tier-1 runs on the completed response
+  (retroactive ANNOTATE/REPAIR). PII is repaired (masked), never shown.
+mode: inline
+latency_budget_ms: 150
+failure_mode: fail_open
+data_sensitivity: public
+stream_release: sentence
+assumed_base_rate: 0.02
+thresholds:
+  privacy:   { flag: 0.30, block: 0.60 }
+  grounding: { flag: 0.55, block: 0.90 }
+  toxicity:  { flag: 0.40, block: 0.75 }
+  injection: { flag: 0.40, block: 0.70 }
+  cost:      { flag: 0.60, block: 0.90 }
+severities_inr:            # ILLUSTRATIVE — agreed with client risk office in deployment
+  privacy: 60000           # goodwill + remediation per exposed-customer incident
+  grounding: 8000          # wrong answer -> refund/rework/callback
+  toxicity: 25000          # brand harm per incident
+  injection: 40000
+  cost: 2000
+episode_budget_inr: 12000
+budget_percentile: 99      # chat: escalate only the top 1% risk-accumulating episodes
+identity_window: { limit_inr: 60000, window_hours: 24 }
+correlated_clusters: [["grounding", "privacy"]]
+tools: {}                  # this assistant takes no actions
+low_trust_taints: true
+redact_pii: true

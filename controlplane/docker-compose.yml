@@ -1,0 +1,16 @@
+services:
+  controlplane:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      CP_PROVIDER: ${CP_PROVIDER:-sim}          # fully offline by default
+      CP_DETECTOR_PROFILE: ${CP_DETECTOR_PROFILE:-lite}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      CP_LEDGER_HMAC_KEY: ${CP_LEDGER_HMAC_KEY:-}
+      CP_POLICY_SIGNING_KEY: ${CP_POLICY_SIGNING_KEY:-}
+    volumes:
+      - cp-data:/app/data
+volumes:
+  cp-data:

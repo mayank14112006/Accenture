@@ -1,0 +1,8 @@
+{
+ "generated_at": 1788335651.504048,
+ "source": "quarantined feedback store (applied overrides only)",
+ "policy": "PROPOSALS ONLY - never auto-applied; apply via /admin/operating-point or a signed pack edit",
+ "min_overrides_per_category": 5,
+ "overturn_rate_trigger": 0.3,
+ "categories": []
+}

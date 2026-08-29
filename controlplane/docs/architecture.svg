@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 700" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8494a7"/>
+    </marker>
+  </defs>
+  <rect width="980" height="700" fill="#0b0f14"/>
+  <text x="30" y="42" fill="#d7dee8" font-size="22" font-weight="700">ControlPlane — request path</text>
+  <text x="30" y="64" fill="#8494a7" font-size="13">episode-level assurance gateway · OpenAI-compatible · policy as data</text>
+
+  <!-- client -->
+  <rect x="30" y="90" width="170" height="52" rx="8" fill="#11161d" stroke="#1e2630"/>
+  <text x="115" y="112" fill="#d7dee8" font-size="14" text-anchor="middle" font-weight="600">Client app / agent</text>
+  <text x="115" y="130" fill="#8494a7" font-size="11" text-anchor="middle">base_url = gateway</text>
+
+  <!-- gateway -->
+  <rect x="250" y="90" width="200" height="52" rx="8" fill="#11161d" stroke="#38bdf8"/>
+  <text x="350" y="112" fill="#d7dee8" font-size="14" text-anchor="middle" font-weight="600">1 · Gateway</text>
+  <text x="350" y="130" fill="#8494a7" font-size="11" text-anchor="middle">SSE sentence-buffered release</text>
+  <line x1="200" y1="116" x2="243" y2="116" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ingress -->
+  <rect x="500" y="90" width="210" height="52" rx="8" fill="#11161d" stroke="#a855f7"/>
+  <text x="605" y="112" fill="#d7dee8" font-size="14" text-anchor="middle" font-weight="600">1a · Ingress gate</text>
+  <text x="605" y="130" fill="#8494a7" font-size="11" text-anchor="middle">injection (direct + in sources), input PII</text>
+  <line x1="450" y1="116" x2="493" y2="116" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- model -->
+  <rect x="770" y="90" width="180" height="52" rx="8" fill="#11161d" stroke="#1e2630"/>
+  <text x="860" y="112" fill="#d7dee8" font-size="14" text-anchor="middle" font-weight="600">Model (any, via API)</text>
+  <text x="860" y="130" fill="#8494a7" font-size="11" text-anchor="middle">sim / OpenAI-compatible</text>
+  <line x1="710" y1="116" x2="763" y2="116" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- egress tiers -->
+  <rect x="250" y="185" width="460" height="120" rx="8" fill="#11161d" stroke="#38bdf8"/>
+  <text x="270" y="210" fill="#d7dee8" font-size="14" font-weight="600">2 · Egress detector ensemble — parallel, per-use-case latency budget</text>
+  <text x="270" y="233" fill="#22c55e" font-size="12">Tier 0 &lt;1 ms · deterministic (regex / checksum / signatures) · 100% · never sheds</text>
+  <text x="270" y="253" fill="#eab308" font-size="12">Tier 1 1–60 ms · lexical + heuristics (lite) / ONNX NLI + toxicity (full)</text>
+  <text x="270" y="273" fill="#f97316" font-size="12">Tier 2 ~400 ms · LLM-as-judge — elevated episodes only</text>
+  <text x="270" y="293" fill="#8494a7" font-size="11">→ coverage score = risk-weighted recall retained (measured by evals)</text>
+  <line x1="860" y1="142" x2="860" y2="165" stroke="#8494a7" stroke-width="1.5"/>
+  <line x1="860" y1="165" x2="713" y2="230" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- fusion -->
+  <rect x="250" y="335" width="460" height="56" rx="8" fill="#11161d" stroke="#1e2630"/>
+  <text x="270" y="358" fill="#d7dee8" font-size="14" font-weight="600">3 · Risk fusion</text>
+  <text x="270" y="378" fill="#8494a7" font-size="11">isotonic calibration per detector → noisy-OR per category → correlated clusters debit once</text>
+  <line x1="480" y1="305" x2="480" y2="328" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- episode ledger -->
+  <rect x="250" y="421" width="460" height="96" rx="8" fill="#131a24" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="270" y="445" fill="#d7dee8" font-size="14" font-weight="600">4 · EPISODE LEDGER — the layer nobody else ships</text>
+  <text x="270" y="466" fill="#e8b3b3" font-size="12">₹ hazard budget: h += −ln(1−p) · loss = Σ (1−e⁻ʰ)·severity · bounded by worst case</text>
+  <text x="270" y="484" fill="#e8b3b3" font-size="12">canonical claim taint (words = digits = lakh) · derivation whitelist · source trust</text>
+  <text x="270" y="502" fill="#e8b3b3" font-size="12">action gate: irreversible ⇒ taint-clear episode · identity rolling windows</text>
+  <line x1="480" y1="391" x2="480" y2="414" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- policy engine (side) -->
+  <rect x="760" y="335" width="190" height="182" rx="8" fill="#11161d" stroke="#eab308"/>
+  <text x="855" y="360" fill="#d7dee8" font-size="14" text-anchor="middle" font-weight="600">5 · Policy engine</text>
+  <text x="855" y="382" fill="#8494a7" font-size="11" text-anchor="middle">YAML packs · versioned · hashed</text>
+  <text x="855" y="399" fill="#8494a7" font-size="11" text-anchor="middle">signed · hot reload · anti-rollback</text>
+  <text x="855" y="416" fill="#8494a7" font-size="11" text-anchor="middle">jurisdiction overlays IN / EU / US</text>
+  <text x="855" y="433" fill="#8494a7" font-size="11" text-anchor="middle">latency budgets · thresholds</text>
+  <text x="855" y="450" fill="#8494a7" font-size="11" text-anchor="middle">severities ₹ · tool reversibility</text>
+  <text x="855" y="467" fill="#8494a7" font-size="11" text-anchor="middle">fail-open / fail-closed per lane</text>
+  <text x="855" y="490" fill="#eab308" font-size="11" text-anchor="middle" font-weight="600">policy is data —</text>
+  <text x="855" y="505" fill="#eab308" font-size="11" text-anchor="middle" font-weight="600">no code change, no restart</text>
+  <line x1="753" y1="426" x2="717" y2="426" stroke="#eab308" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="753" y1="363" x2="717" y2="363" stroke="#eab308" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- decision -->
+  <rect x="250" y="547" width="460" height="56" rx="8" fill="#11161d" stroke="#22c55e"/>
+  <text x="270" y="570" fill="#d7dee8" font-size="14" font-weight="600">6 · Decision</text>
+  <text x="270" y="590" font-size="12">
+    <tspan fill="#22c55e">PASS</tspan><tspan fill="#8494a7"> · </tspan><tspan fill="#eab308">ANNOTATE</tspan><tspan fill="#8494a7"> · </tspan><tspan fill="#38bdf8">REPAIR</tspan><tspan fill="#8494a7"> · </tspan><tspan fill="#f97316">ESCALATE</tspan><tspan fill="#8494a7"> · </tspan><tspan fill="#ef4444">BLOCK</tspan><tspan fill="#8494a7"> · </tspan><tspan fill="#a855f7">HOLD_ACTION</tspan>
+  </text>
+  <line x1="480" y1="517" x2="480" y2="540" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- evidence ledger + feedback -->
+  <rect x="30" y="630" width="440" height="52" rx="8" fill="#11161d" stroke="#1e2630"/>
+  <text x="250" y="652" fill="#d7dee8" font-size="13" text-anchor="middle" font-weight="600">7 · Evidence ledger — hash chain, keyed HMAC digests, external anchors</text>
+  <text x="250" y="670" fill="#8494a7" font-size="11" text-anchor="middle">every decision: risk vector · coverage · policy_version · pack_hash · ₹ debit</text>
+  <rect x="510" y="630" width="440" height="52" rx="8" fill="#11161d" stroke="#1e2630"/>
+  <text x="730" y="652" fill="#d7dee8" font-size="13" text-anchor="middle" font-weight="600">8 · Feedback — quarantined override store (two-person rule)</text>
+  <text x="730" y="670" fill="#8494a7" font-size="11" text-anchor="middle">PII-redacted, 30-day retention → threshold retune → before/after</text>
+  <line x1="380" y1="603" x2="290" y2="623" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="580" y1="603" x2="670" y2="623" stroke="#8494a7" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- left rail: modes -->
+  <rect x="30" y="185" width="180" height="332" rx="8" fill="#0e131a" stroke="#1e2630"/>
+  <text x="120" y="210" fill="#d7dee8" font-size="13" text-anchor="middle" font-weight="600">One engine, three modes</text>
+  <text x="120" y="238" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="600">GATE</text>
+  <text x="120" y="255" fill="#8494a7" font-size="11" text-anchor="middle">block-capable · holds actions</text>
+  <text x="120" y="283" fill="#eab308" font-size="12" text-anchor="middle" font-weight="600">INLINE</text>
+  <text x="120" y="300" fill="#8494a7" font-size="11" text-anchor="middle">annotate / repair / stream</text>
+  <text x="120" y="328" fill="#22c55e" font-size="12" text-anchor="middle" font-weight="600">AUDIT (shadow)</text>
+  <text x="120" y="345" fill="#8494a7" font-size="11" text-anchor="middle">observe + ledger only</text>
+  <text x="120" y="373" fill="#d7dee8" font-size="13" text-anchor="middle" font-weight="600">Three lanes</text>
+  <text x="120" y="398" fill="#8494a7" font-size="11" text-anchor="middle">support · 150 ms · fail-open</text>
+  <text x="120" y="415" fill="#8494a7" font-size="11" text-anchor="middle">copilot · 1.5 s · fail-open</text>
+  <text x="120" y="432" fill="#8494a7" font-size="11" text-anchor="middle">agent · 10 s · fail-closed · gate</text>
+  <text x="120" y="464" fill="#d7dee8" font-size="13" text-anchor="middle" font-weight="600">Agent tool calls</text>
+  <text x="120" y="486" fill="#8494a7" font-size="11" text-anchor="middle">POST /v1/actions/propose</text>
+  <text x="120" y="503" fill="#a855f7" font-size="11" text-anchor="middle">gated BEFORE execution</text>
+</svg>

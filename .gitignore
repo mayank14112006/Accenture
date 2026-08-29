@@ -1,0 +1,10 @@
+node_modules/
+.claude/
+.env
+*.log
+dist/
+.DS_Store
+Thumbs.db
+deck/qa/
+deck/qa_bp/
+submission/

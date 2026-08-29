@@ -1,0 +1,9 @@
+# OPTIONAL model-backed detector adapters (Tier 1 upgrades).
+# The prototype runs fully without these; installing them upgrades:
+#   - grounding: lexical entailment -> ONNX int8 cross-encoder NLI
+#   - toxicity:  lexicon -> transformer toxicity classifier
+# Install: pip install -r requirements-models.txt
+# Then set CP_DETECTOR_PROFILE=full
+onnxruntime>=1.20
+transformers>=4.46
+optimum[onnxruntime]>=1.23

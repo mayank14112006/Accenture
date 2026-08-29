@@ -1,0 +1,8 @@
+# US overlay — sectoral posture (no single federal statute): moderate privacy
+# thresholds; grounding unchanged from base.
+thresholds:
+  privacy:   { flag: 0.35, block: 0.70 }
+severities_inr:
+  privacy: 180000
+redact_pii: true
+low_trust_taints: false

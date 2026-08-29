@@ -1,0 +1,42 @@
+{
+ "note": "hardware-dependent measurements split out of results.json; quoted latency/throughput/cost figures come from evals/out/load_test.json",
+ "machine": "LAPTOP-4P6OEE6E",
+ "platform": "Windows-11-10.0.26200-SP0",
+ "python": "3.13.5",
+ "test": {
+  "wall_seconds": 8.6,
+  "latency_ms": {
+   "added_p50": 1.48,
+   "added_p95": 3.45,
+   "added_p99": 13.64,
+   "ttft_p50": 0.0,
+   "ttft_p95": 0.0,
+   "inter_sentence_gap_p95": 0.0
+  },
+  "cost": {
+   "model_spend": 3.0594,
+   "assurance_spend": 0.0015,
+   "assurance_pct_of_model_spend": 0.05,
+   "avoided_loss_illustrative": 21641000.0,
+   "note": "cost rates and severities are stated assumptions; see policy packs and config.py"
+  }
+ },
+ "blind": {
+  "wall_seconds": 0.2,
+  "latency_ms": {
+   "added_p50": 1.47,
+   "added_p95": 3.3,
+   "added_p99": 6.99,
+   "ttft_p50": 0.0,
+   "ttft_p95": 0.0,
+   "inter_sentence_gap_p95": 0.0
+  },
+  "cost": {
+   "model_spend": 0.0788,
+   "assurance_spend": 0.0,
+   "assurance_pct_of_model_spend": 0.04,
+   "avoided_loss_illustrative": 601000.0,
+   "note": "cost rates and severities are stated assumptions; see policy packs and config.py"
+  }
+ }
+}
